@@ -1,18 +1,39 @@
 #include "transform.h"
 
 
-Transform *Transform_new()
+void        Transform_init(void *_self)
 {
-	Transform *self = malloc(sizeof(Transform));
-	self->component_type = TRANSFORM;
+    if (!_self)
+        return;
+    Transform *self = _self;
+	
+	INIT(Component, self->parent);
+    INIT_COMP(TRANSFORM, Transform, self);
+    self->component_type = TRANSFORM;
+	self->update = Transform_update;
+	self->clean  = Transform_clean;
+	
 	self->x = 0;
 	self->y = 0;
 	self->rot = 0;
 	self->size = 0;
-	return self;
 }
 
-void       Transform_delete(Transform *self)
+
+void       Transform_update(void *_self)
 {
-	FREE(self);
+    if (!_self)
+        return;
+    //Transform *self = _self;
+    
+}
+
+
+void       Transform_clean(void *_self)
+{
+    if (!_self)
+        return;
+    Transform *self = _self;
+    CLEAN(self->parent);
+    
 }

@@ -6,13 +6,13 @@
 
 // -- Transform -- //
 CLASS_EXT(Transform, Component,
-	int x, y;
-	float rot;
-	float size;
+	double x, y;
+	double rot, size;
 )
 
-Transform *Transform_new();
-void       Transform_delete(Transform *self);
+void       Transform_init(void *_self);
+void       Transform_update(void *_self);
+void       Transform_clean(void *_self);
 
 #endif /* __TRANSFORM_H__ */
 

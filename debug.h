@@ -7,8 +7,10 @@
             goto error;\
         }
         
-#define SUCCESS(M,...) \
+#define _INFO(M,...) \
         fprintf(stdout, "[+] MSG: " M " \n", __VA_ARGS__)
+
+#define INFO(M) (_INFO("%s", M))
 
 #endif /* __DEBUG_H__ */
 

@@ -2,17 +2,13 @@
 #define __HELPERS_H__
 
 #define NEW(type)                       type##_new()
-#define INIT(type,object)               type##_init(object)
+#define INIT(type,object)               type##_init((type *) &object);
 
 // sf stands for speed factor
-#define UPDATE(object,sf)               object->update(object,sf); 
-#define DELETE(object)                  object->delete(object);
+#define UPDATE(object,sf)               object.update(&object, sf); 
+#define CLEAN(object)                   object.clean(&object);
 
-
-#define INIT_SUPER(super,object)        super##_init(object->parent)
-#define UPDATE_SUPER(super,object,sf)   super##_update(object->parent,sf)
-
-
+#define REGISTER(registrar,object_type,object); registrar.register##object_type(&registrar,object);
 
 #define FREE(object)            \
     if (object)                 \

@@ -3,23 +3,33 @@
 
 #include "ooc.h"
 
+#define INIT_COMP(type,class,object)   \
+    self->component_type = type;            \
+    object->update = class##_update;         \
+    object->clean  = class##_clean;
+    
+
 /* ------- Component -------*/
 // COMPONENT_TYPE enum -- used to ID components
-enum
+typedef enum
 {
-	TRANSFORM = 0,
+    COMPONENT = 0,
+	TRANSFORM,
 	RENDERER,
 	PHYSICS,
 	COMPONENT_TYPE_N
-} COMPONENT_TYPE;
+} ComponentType;
 
 CLASS(Component,
 	// Object *object // Reference to the owning object
-	unsigned int component_type;   // for ID'ing components
+	ComponentType component_type;   // for ID'ing components
+	void (*update)(void *_self);
+	void (*clean)(void *_self);
 )
 
-Component *Component_new();     // probably wont be used
-void Component_delete(); 		// probably wont be used
+void        Component_init(void *_self);        // probably wont be used
+void        Component_update(void *_self); 		// probably wont be used
+void        Component_clean(void *_self); 		// probably wont be used
 
 
 #endif /* __COMPONENT_H__ */

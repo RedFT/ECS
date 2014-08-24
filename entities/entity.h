@@ -8,36 +8,40 @@
 #include "components/renderer.h"
 
 
+#define INIT_ENT(class,object)   \
+    object->update = class##_update;         \
+    object->clean  = class##_clean;
+
+
 /* -------- Entity -------- */
 CLASS(Entity,
-	/* Future Implementation */
-	void (*delete)(void *self);
 	GArray *component_darray;
-	// SceneRenderer scene_renderer
+	void (*update)(void *_self, double sf);
+	void (*clean)(void *_self);
 ) 
 
 
-Entity *Entity_new();
-int     Entity_init(void *self);
-void    Entity_delete(void *self);
+void    Entity_init(void *_self);
+void    Entity_update(void *_self, double sf);
+void    Entity_clean(void *_self);
 
 
-/* TEST ENTITY */
+/* ---- TEST ENTITY -----*/
 CLASS_EXT(Door, Entity,
 	void (*open)();
 	void (*close)();
 	
-	Transform *transform;
-	Physics   *physics;
-	Renderer  *renderer;
+	Transform transform;
+	Physics   physics;
+	Renderer  renderer;
 )
 
 void o();
 void c();
 
-Door *Door_new();
-void  Door_delete(void *self);
-
+void    Door_init(void *_self);
+void    Door_update(void *_self, double sf);
+void    Door_clean(void *_self);
 
 
 #endif /* __ENTITY_H__ */

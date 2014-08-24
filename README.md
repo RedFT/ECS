@@ -14,7 +14,7 @@ Each Manager will be composed of Entities (Player, Enemy, Camera,
 any game object, etc) and Subsystems (Event Subsystem, Movement Subsystem,
 Transformation Subsystem, etc).
 
-So far, this is what the Composition Heirarchy is supposed to look like:
+So far, this is what the Composition Heirarchy is looks like:
 
 
         App:

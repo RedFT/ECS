@@ -13,14 +13,15 @@ CLASS(App,
     int app_running;
     SDL_Window *win;
     SDL_Renderer *ren;
-    Manager *manager;
+    Manager      manager;
     // EventManager event_manager;
+    
+    
+    void (*clean)(App *self);
 )
-
-App *App_new();
-void App_delete(App *self);
 
 int  App_init(App*self);
 int  App_run(App *self);
+void App_clean(App *self);
 
 #endif /* end of include guard: APP_H */

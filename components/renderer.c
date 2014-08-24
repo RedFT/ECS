@@ -1,13 +1,33 @@
 #include "renderer.h"
 
 
-Renderer *Renderer_new()
+void      Renderer_init(void *_self)
 {
-    Renderer *self = malloc(sizeof(Renderer));
+    if (!_self)
+        return;
+    Renderer *self = _self;
+    
+    INIT(Component, self->parent);
+    INIT_COMP(RENDERER, Renderer, self);
     self->component_type = RENDERER;
-    return self;
+	self->update = Renderer_update;
+	self->clean  = Renderer_clean;
 }
-void      Renderer_delete(Renderer *self)
+
+
+void       Renderer_update(void *_self)
 {
-    FREE(self);
+    if (!_self)
+        return;
+    // Renderer *self = _self;
+}
+
+
+void       Renderer_clean(void *_self)
+{
+    if (!_self)
+        return;
+    Renderer *self = _self;
+    CLEAN(self->parent);
+    
 }

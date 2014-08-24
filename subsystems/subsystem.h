@@ -12,10 +12,6 @@
 CLASS(Subsystem,
 	GArray *entity_darray;
 	
-	/* -- STANDARD SUBSYSTEM PROPERTIES        -- */
-	
-	/* -- STANDARD SUBSYSTEM FUNCTION POINTERS -- */
-	void (*update)(void *self, float sf);
 )
 
 

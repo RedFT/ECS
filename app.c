@@ -5,33 +5,16 @@
 #include "entities/entity.h"
 
 
-App *App_new()
-{
-    App *app = malloc(sizeof(App));
-    App_init(app);
-    return app;
-}
-
-
-void  App_delete(App *self)
-{
-    if (!self) 
-        return;
-    if (self->manager) DELETE(self->manager);
-    //if (self->ren) SDL_DestroyRenderer(self->ren);
-    //if (self->win) SDL_DestroyWindow(self->win);
-    FREE(self);
-}
-
-
 int   App_init(App *self)
 {
     if (!self)
         return 1;
     self->app_running = 1;
-    self->manager = NEW(Manager);
+    self->clean = App_clean;
     INIT(Manager, self->manager);
-    self->manager->app = self;
+    REGISTER(self->manager, App, self);
+    
+    
     /*
     self->win = SDL_CreateWindow("Example",
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -52,15 +35,21 @@ error:
 
 int   App_run(App *self)
 {
+    Door d;
+    INIT(Door, d);
     while (self->app_running)
     {
         UPDATE(self->manager, 0);
-        Door *d = NEW(Door);
-        DELETE(d);
     }
+    CLEAN(d);
     
     return 0;
 }
 
 
+void  App_clean(App *self)
+{
+    CLEAN(self->manager);
+    SDL_Quit();
+}
 

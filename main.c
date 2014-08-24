@@ -2,9 +2,9 @@
 
 int main(int argc, const char *argv[])
 {
-    App *app = App_new();
-    App_run(app);
-    App_delete(app);
-    
+    App app;
+    INIT(App, app);
+    App_run(&app);
+    CLEAN(app);
     return 0;
 }

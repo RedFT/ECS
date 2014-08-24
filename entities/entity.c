@@ -1,25 +1,33 @@
 #include "entity.h"
+#include "debug.h"
 
 
-Entity *Entity_new()
+
+void     Entity_init(void *_self)
 {
-    Entity *self = malloc(sizeof(Entity));
-    Entity_init(self);
-    return self;
-}
-
-int     Entity_init(void *_self)
-{
+    if (!_self)
+        return;
     Entity *self = _self;
+    INIT_ENT(Entity, self);
     self->component_darray = g_array_new(TRUE, TRUE, sizeof(Component *));
-    return 0;
 }
 
-void    Entity_delete(void *_self)
+
+void    Entity_update(void *_self, double sf)
 {
+    if (!_self)
+        return;
+    //sEntity *self = _self;
+}
+
+
+void    Entity_clean(void *_self)
+{
+    if (!_self)
+        return;
     Entity *self = _self;
     g_array_free(self->component_darray, TRUE);
-	FREE(self);
+    INFO("Free'd component array");
 }
 
 
@@ -33,37 +41,36 @@ void c()
     printf("Close\n");
 }
 
-Door *Door_new()
+
+void     Door_init(void *_self)
 {
-	Door *self = malloc(sizeof(Door));
-	self->delete = Door_delete;
-	self->open = o;
-	self->close = c;
-	
-	self->transform = Transform_new();
-	self->physics   = Physics_new();
-	self->renderer  = Renderer_new();
-	return self;
+    if (!_self)
+        return;
+    Door *self = _self;
+    
+    INIT(Entity, self->parent); // init super class
+    
+    INIT_ENT(Door, self);
+    
+    
+	INIT(Transform, self->transform);
+    INIT(Physics,   self->physics);
+	INIT(Renderer,  self->renderer);
 }
 
 
-int     Door_init(void *_self)
+void    Door_update(void *_self, double sf)
 {
-    Door *self = _self;
-    Entity_init(&self->parent);
-    return 0;
+    if (!_self)
+        return;
+    //Door *self = _self;
 }
 
 
-void  Door_delete(void *_self)
+void  Door_clean(void *_self)
 {
+    if (!_self)
+        return;
     Door *self = _self;
-    if (self->transform)
-        Transform_delete(self->transform);
-	if (self->physics)
-	    Physics_delete(self->physics);
-	if (self->renderer)
-	    Renderer_delete(self->renderer);
-	
-	FREE(self);
+    Entity_clean(&self->parent);
 }
