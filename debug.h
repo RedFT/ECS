@@ -1,0 +1,14 @@
+#ifndef __DEBUG_H__
+#define __DEBUG_H__
+
+#define ERR(A,M,...) \
+        if (!A) {\
+            fprintf(stderr, "[!] ERROR: " M " \n", __VA_ARGS__);\
+            goto error;\
+        }
+        
+#define SUCCESS(M,...) \
+        fprintf(stdout, "[+] MSG: " M " \n", __VA_ARGS__)
+
+#endif /* __DEBUG_H__ */
+

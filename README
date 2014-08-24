@@ -1,9 +1,4 @@
-ECS
-===
-
-Game Engine Based on Entity Component System.
-
-This is one of many attempts at making a game engine in C.
+This is one of my many attempts at making a game engine in C.
 
 This game engine specifically uses a 'Component based Entity System.'
 
