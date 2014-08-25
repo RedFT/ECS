@@ -2,7 +2,7 @@
 #include "debug.h"
 #include <stdlib.h>
 
-#include "entities/entity.h"
+#include "en_entity.h"
 
 
 int   App_init(App *self)

@@ -1,4 +1,4 @@
-#include "keyboardsubsystem.h"
+#include "ss_keyboard.h"
 #include "debug.h"
 
 void KeyboardSubsystem_init(void *_self)
@@ -27,5 +27,16 @@ void KeyboardSubsystem_clean(void *_self)
     if (!_self)
         return;
     KeyboardSubsystem *self = _self;
+    
     Subsystem_clean(&self->parent);
+}
+
+
+void KeyboardSubsystem_registerEntity(void *_self, Entity *entity)
+{
+    if (!_self)
+        return;
+    KeyboardSubsystem *self = _self;
+    
+    Subsystem_registerEntity(self, entity);
 }

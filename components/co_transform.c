@@ -1,4 +1,4 @@
-#include "transform.h"
+#include "co_transform.h"
 
 
 void        Transform_init(void *_self)
@@ -8,6 +8,8 @@ void        Transform_init(void *_self)
     Transform *self = _self;
 	
 	INIT(Component, self->parent);
+	
+	
     INIT_COMP("transform", Transform, self);
 	
 	self->x = 0;
@@ -31,6 +33,6 @@ void       Transform_clean(void *_self)
     if (!_self)
         return;
     Transform *self = _self;
-    CLEAN(self->parent);
     
+    Component_clean(&self->parent);
 }

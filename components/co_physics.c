@@ -1,4 +1,4 @@
-#include "physics.h"
+#include "co_physics.h"
 
 
 void        Physics_init(void *_self)
@@ -8,6 +8,7 @@ void        Physics_init(void *_self)
     Physics *self = _self;
     
     INIT(Component, self->parent);
+    
     
 	INIT_COMP("physics", Physics, self);
 	
@@ -32,6 +33,6 @@ void       Physics_clean(void *_self)
     if (!_self)
         return;
     Physics *self = _self;
-    CLEAN(self->parent);
     
+    Component_clean(&self->parent);
 }

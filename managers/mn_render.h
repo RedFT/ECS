@@ -1,8 +1,8 @@
-#ifndef __RENDERMANAGER_H__
-#define __RENDERMANAGER_H__
+#ifndef __MN_RENDER_H__
+#define __MN_RENDER_H__
 
 #include "ooc.h"
-#include "manager.h"
+#include "mn_manager.h"
 #include <SDL2/SDL_render.h>
 
 
@@ -18,5 +18,5 @@ void RenderManager_registerApp(void *_self, App *app);
 
 void RenderManager_renderScreen(RenderManager *self);
 
-#endif /* __RENDERMANAGER_H__ */
+#endif /* __MN_RENDER_H__ */
 

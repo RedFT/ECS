@@ -1,10 +1,10 @@
-#ifndef __RENDERER_H__
-#define __RENDERER_H__
+#ifndef __CO_RENDERER_H__
+#define __CO_RENDERER_H__
 
 
 #include <SDL2/SDL_render.h>
 
-#include "component.h"
+#include "co_component.h"
 
 
 // -- Renderer -- //
@@ -17,5 +17,5 @@ void        Renderer_update(void *_self);
 void        Renderer_clean(void *_self);
 
 
-#endif /* __RENDERER_H__ */
+#endif /* __CO_RENDERER_H__ */
 

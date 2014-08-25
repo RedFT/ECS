@@ -1,4 +1,4 @@
-#include "component.h"
+#include "co_component.h"
 
 
 

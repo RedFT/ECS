@@ -1,7 +1,7 @@
-#ifndef __PHYSICS_H__
-#define __PHYSICS_H__
+#ifndef __CO_PHYSICS_H__
+#define __CO_PHYSICS_H__
 
-#include "component.h"
+#include "co_component.h"
 
 
 // -- Physics -- //
@@ -19,5 +19,5 @@ void        Physics_update(void *_self);
 void        Physics_clean(void *_self);
 
 
-#endif /* __PHYSICS_H__ */
+#endif /* __CO_PHYSICS_H__ */
 

@@ -1,6 +1,6 @@
-#include "manager.h"
-#include "subsystem.h"
-#include "entity.h"
+#include "mn_manager.h"
+#include "ss_subsystem.h"
+#include "en_entity.h"
 #include "app.h"
 #include "debug.h"
 

@@ -1,4 +1,4 @@
-#include "eventmanager.h"
+#include "mn_event.h"
 #include "app.h"
 #include "debug.h"
 
@@ -30,6 +30,12 @@ void EventManager_update(void *_self, double sf)
     
     self->keyboard = self->keyboard_ssys.keyboard;
     self->mouse    = self->mouse_ssys.mouse;
+    
+    if (SDL_HasEvent(SDL_QUIT))
+    {
+        if (self->app)
+            self->app->app_running = 0;
+    }
     
     if (self->keyboard[SDL_SCANCODE_ESCAPE])
     {

@@ -1,4 +1,4 @@
-#include "subsystem.h"
+#include "ss_subsystem.h"
 #include "debug.h"
 
 
@@ -27,4 +27,12 @@ void Subsystem_clean(void *_self)
     Subsystem *self = _self;
     g_array_free(self->entity_darray, TRUE);
     _INFO("Free'd Entity array for: %s", self->subsystem_type);
+}
+
+void Subsystem_registerEntity(void *_self, Entity *entity)
+{
+    if (!_self)
+        return;
+    Subsystem *self = _self;
+    g_array_append_val(self->entity_darray, entity);
 }

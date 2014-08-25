@@ -1,4 +1,4 @@
-#include "mousesubsystem.h"
+#include "ss_mouse.h"
 #include "debug.h"
 
 
@@ -43,7 +43,15 @@ void MouseSubsystem_clean(void *_self)
     if (!_self)
         return;
     MouseSubsystem *self = _self;
+    
     Subsystem_clean(&self->parent);
 }
 
 
+void MouseSubsystem_registerEntity(void *_self, Entity *entity)
+{
+    if (!_self)
+        return;
+    MouseSubsystem *self = _self;
+    Subsystem_registerEntity(self, entity);
+}

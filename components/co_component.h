@@ -1,5 +1,5 @@
-#ifndef __COMPONENT_H__
-#define __COMPONENT_H__
+#ifndef __CO_COMPONENT_H__
+#define __CO_COMPONENT_H__
 
 #include "ooc.h"
 #include <string.h>
@@ -35,5 +35,5 @@ void        Component_update(void *_self); 		// probably wont be used
 void        Component_clean(void *_self); 		// probably wont be used
 
 
-#endif /* __COMPONENT_H__ */
+#endif /* __CO_COMPONENT_H__ */
 

@@ -7,9 +7,9 @@
 
 #include "ooc.h"
 #include "constants.h"
-#include "eventmanager.h"
-//#include "scenemanager.h"
-#include "rendermanager.h"
+#include "mn_event.h"
+//#include "mn_scene.h"
+#include "mn_render.h"
 
 
 CLASS(App,

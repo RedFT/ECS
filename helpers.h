@@ -1,7 +1,7 @@
 #ifndef __HELPERS_H__
 #define __HELPERS_H__
 
-#define NEW(type)                       type##_new()
+
 #define INIT(type,object)               type##_init((type *) &object);
 
 // sf stands for speed factor

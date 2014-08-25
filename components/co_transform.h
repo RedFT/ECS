@@ -1,7 +1,7 @@
-#ifndef __TRANSFORM_H__
-#define __TRANSFORM_H__
+#ifndef __CO_TRANSFORM_H__
+#define __CO_TRANSFORM_H__
 
-#include "component.h"
+#include "co_component.h"
 
 
 // -- Transform -- //
@@ -14,5 +14,5 @@ void       Transform_init(void *_self);
 void       Transform_update(void *_self);
 void       Transform_clean(void *_self);
 
-#endif /* __TRANSFORM_H__ */
+#endif /* __CO_TRANSFORM_H__ */
 

@@ -1,11 +1,11 @@
-#ifndef __MOUSESUBSYSTEM_H__
-#define __MOUSESUBSYSTEM_H__
+#ifndef __SS_MOUSE_H__
+#define __SS_MOUSE_H__
 
 #include <SDL2/SDL_mouse.h>
 
 
 #include "ooc.h"
-#include "subsystem.h"
+#include "ss_subsystem.h"
 
 
 enum
@@ -21,12 +21,12 @@ enum
 
 CLASS_EXT(MouseSubsystem, Subsystem,
     int mouse[6];
-    void (*registerMouse)(void *_self, int *mouse);
 )
 
 void MouseSubsystem_init(void *_self);
 void MouseSubsystem_update(void *_self, double sf);
 void MouseSubsystem_clean(void *_self);
+void MouseSubsystem_registerEntity(void *_self, Entity *entity);
 
-#endif /* __MOUSESUBSYSTEM_H__ */
+#endif /* __SS_MOUSE_H__ */
 

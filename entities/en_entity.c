@@ -1,5 +1,7 @@
-#include "entity.h"
+#include "en_entity.h"
 #include "debug.h"
+
+#include "ss_event.h"
 
 
 
@@ -28,6 +30,14 @@ void    Entity_clean(void *_self)
     Entity *self = _self;
     g_array_free(self->component_darray, TRUE);
     _INFO("Free'd Component array for: %s", self->entity_type);
+}
+
+
+void    Entity_notify(void *_self, Event event)
+{
+    if (!_self)
+        return;
+    //Entity *self = _self;
 }
 
 
@@ -73,4 +83,13 @@ void  Door_clean(void *_self)
         return;
     Door *self = _self;
     Entity_clean(&self->parent);
+}
+
+
+void    Door_notify(void *_self, Event event)
+{
+    if (!_self)
+        return;
+    //Door *self = _self;
+    
 }
