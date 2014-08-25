@@ -8,9 +8,9 @@ SRC_DIR=./ ./components/ ./entities/ ./subsystems/ ./managers/
 INCLUDES=$(foreach dir, $(SRC_DIR), -I$(dir))
 SOURCES=$(foreach dir, $(SRC_DIR), $(wildcard $(dir)*.c))
 HEADERS:=$(filter-out ./main.h,$(SOURCES:.c=.h))
-# RAW_HEADERS=$(SOURCES:.c=.h)
 
 
+# clean up stuff so as not to dirty up the git repo :)
 VIM_GARBAGE:=$(foreach dir, $(SRC_DIR), $(dir).*.swp)
 GEDIT_GARBAGE:=$(foreach dir, $(SRC_DIR), $(dir)*~)
 OBJECTS=$(SOURCES:.c=.o)

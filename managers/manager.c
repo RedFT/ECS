@@ -25,9 +25,9 @@ void     Manager_clean(void *_self)
     Manager *self = _self;
     
     g_array_free(self->subsystem_darray, TRUE);
-    INFO("Free'd Subsystem Array");
+    _INFO("Free'd Subsystem array for: %s", self->manager_type);
     g_array_free(self->entity_darray, TRUE);
-    INFO("Free'd Entity Array");
+    _INFO("Free'd Entity array for: %s", self->manager_type);
 }
 
 

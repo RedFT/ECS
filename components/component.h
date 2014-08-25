@@ -11,7 +11,7 @@
     
 
 /* ------- Component -------*/
-// COMPONENT_TYPE enum -- used to ID components
+// COMPONENT_TYPE enum -- used to ID components // unused. Using strings to ID
 /*
 typedef enum
 {

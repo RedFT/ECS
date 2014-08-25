@@ -2,11 +2,14 @@
 
 #define APP_H
 
+
 #include <SDL2/SDL.h>
 
 #include "ooc.h"
 #include "constants.h"
 #include "eventmanager.h"
+//#include "scenemanager.h"
+#include "rendermanager.h"
 
 
 CLASS(App,
@@ -14,6 +17,8 @@ CLASS(App,
     SDL_Window *win;
     SDL_Renderer *ren;
     EventManager event_manager;
+    // SceneManager scene_manager;
+    RenderManager render_manager;
     
     
     void (*clean)(App *self);

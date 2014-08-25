@@ -9,8 +9,14 @@
 #include "components/component.h"
 
 
+#define INIT_SUBSYS(type,class,object)  \
+    strcpy(self->subsystem_type, type); \
+    self->update = class##_update;      \
+    self->clean  = class##_clean;       \
+
+
 CLASS(Subsystem,
-    char   subsystem_name[100];
+    char   subsystem_type[100];
 	GArray *entity_darray;
 	void (*update)(void *_self, double sf);
 	void (*clean)(void *_self);

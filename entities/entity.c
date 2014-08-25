@@ -27,7 +27,7 @@ void    Entity_clean(void *_self)
         return;
     Entity *self = _self;
     g_array_free(self->component_darray, TRUE);
-    INFO("Free'd component array");
+    _INFO("Free'd Component array for: %s", self->entity_type);
 }
 
 

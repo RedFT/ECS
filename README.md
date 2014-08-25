@@ -14,6 +14,14 @@ Each Manager will be composed of Entities (Player, Enemy, Camera,
 any game object, etc) and Subsystems (Event Subsystem, Movement Subsystem,
 Transformation Subsystem, etc).
 
+In order for a subsystem to act upon an entity, it must be registered with
+the subsystem. That way, we can insure that the entity has the correct components
+for the subsystem to manipulate. Rather than looping through a list of ALL
+entities, we can loop through a list of entities with the correct components
+(the registered entities).
+
+** all update functions must take a second parameter 'sf' for speed factor. 
+
 So far, this is what the Composition Heirarchy is looks like:
 
 
@@ -22,13 +30,16 @@ So far, this is what the Composition Heirarchy is looks like:
                 Keyboard Subsystem,   // Gets the state of the keyboard.
                 Mouse    Subsystem,   // Gets the state of the mouse.
                 
-                Keybaord Entity,      // Holds the state of the keyboard.
-                Mouse    Entity,      // Holds the state of the mouse.
+                Keybaord Uint8[],     // Holds the state of the keyboard.
+                Mouse    int[],       // Holds the state of the mouse.
                                       
             Scene Manager:
                 Event    Subsystem,   // Gets the state of keyboard and mouse sends
                                       // appropriate events to each Entity depending 
                                       // on which Entity registered for which event.
+                                      // Holds a reference to the Event Manager
+                                      // to emit keyboard and mouse events.
+                                      
                 Movement Subsystem,
                 Leveling Subsystem,
                 ...                   // Probably many more subsystems.

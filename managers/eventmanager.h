@@ -10,10 +10,10 @@
 CLASS_EXT(EventManager, Manager,
     
     KeyboardSubsystem keyboard_ssys;
-    const Uint8       *keyboard;        // Using SDL_GetKeyboardState(NULL);
+    const Uint8       *keyboard;        // Retrieved from keyboard_ssys
     
     MouseSubsystem    mouse_ssys;
-    int               mouse[5];         // Using SDL_GetMouseState(&mouse[4], &mouse[5]);
+    int               *mouse;           // Retrieved from mouse_ssys
 )
 
 

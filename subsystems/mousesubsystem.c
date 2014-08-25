@@ -8,11 +8,9 @@ void MouseSubsystem_init(void *_self)
         return;
     MouseSubsystem *self = _self;
     
-    strcpy(self->subsystem_name, "mousesubsystem");
+    INIT(Subsystem, self->parent);  // init superclass
     
-    self->update = MouseSubsystem_update;
-    self->clean = MouseSubsystem_clean;
-    self->registerMouse = MouseSubsystem_registerMouse;
+    INIT_SUBSYS("mousesubsystem", MouseSubsystem, self);
 }
 
 
@@ -22,24 +20,21 @@ void MouseSubsystem_update(void *_self, double sf)
         return;
     MouseSubsystem *self = _self;
     
-    if (self->mouse)
-    {
-        int mouse_state = SDL_GetMouseState(&self->mouse[4], &self->mouse[5]);
-        if (mouse_state & SDL_BUTTON(SDL_BUTTON_LEFT))
-            self->mouse[1] = 1;
-        else
-            self->mouse[1] = 0;
-            
-        if (mouse_state & SDL_BUTTON(SDL_BUTTON_MIDDLE))
-            self->mouse[2] = 1;
-        else
-            self->mouse[2] = 0;
-            
-        if (mouse_state & SDL_BUTTON(SDL_BUTTON_RIGHT))
-            self->mouse[3] = 1;
-        else
-            self->mouse[3] = 0;
-    }
+    int mouse_state = SDL_GetMouseState(&self->mouse[MOUSE_X_POS], &self->mouse[MOUSE_Y_POS]);
+    if (mouse_state & SDL_BUTTON(SDL_BUTTON_LEFT))
+        self->mouse[MOUSE_LEFT] = 1;
+    else
+        self->mouse[MOUSE_LEFT] = 0;
+        
+    if (mouse_state & SDL_BUTTON(SDL_BUTTON_MIDDLE))
+        self->mouse[MOUSE_MIDDLE] = 1;
+    else
+        self->mouse[MOUSE_MIDDLE] = 0;
+        
+    if (mouse_state & SDL_BUTTON(SDL_BUTTON_RIGHT))
+        self->mouse[MOUSE_RIGHT] = 1;
+    else
+        self->mouse[MOUSE_RIGHT] = 0;
 }
 
 
@@ -47,16 +42,8 @@ void MouseSubsystem_clean(void *_self)
 {
     if (!_self)
         return;
-    //MouseSubsystem *self = _self;
-}
-
-
-void MouseSubsystem_registerMouse(void *_self, int *mouse)
-{
-    if (!_self)
-        return;
-    MouseSubsystem *self = _self; 
-    self->mouse = mouse;
+    MouseSubsystem *self = _self;
+    Subsystem_clean(&self->parent);
 }
 
 
