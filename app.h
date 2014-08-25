@@ -8,7 +8,7 @@
 #include "ooc.h"
 #include "constants.h"
 #include "mn_event.h"
-//#include "mn_scene.h"
+#include "mn_scene.h"
 #include "mn_render.h"
 
 
@@ -17,7 +17,7 @@ CLASS(App,
     SDL_Window *win;
     SDL_Renderer *ren;
     EventManager event_manager;
-    // SceneManager scene_manager;
+    SceneManager scene_manager;
     RenderManager render_manager;
     
     

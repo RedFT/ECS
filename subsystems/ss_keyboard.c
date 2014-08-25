@@ -10,6 +10,7 @@ void KeyboardSubsystem_init(void *_self)
     INIT(Subsystem, self->parent);  // init superclass
     
     INIT_SUBSYS("keyboardsubsystem", KeyboardSubsystem, self);
+    _INFO("Initialized %s", self->subsystem_type);
 }
 
 
@@ -29,14 +30,4 @@ void KeyboardSubsystem_clean(void *_self)
     KeyboardSubsystem *self = _self;
     
     Subsystem_clean(&self->parent);
-}
-
-
-void KeyboardSubsystem_registerEntity(void *_self, Entity *entity)
-{
-    if (!_self)
-        return;
-    KeyboardSubsystem *self = _self;
-    
-    Subsystem_registerEntity(self, entity);
 }

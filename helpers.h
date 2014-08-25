@@ -5,10 +5,10 @@
 #define INIT(type,object)               type##_init((type *) &object);
 
 // sf stands for speed factor
-#define UPDATE(object,sf)               object.update(&object, sf); 
-#define CLEAN(object)                   object.clean(&object);
+#define UPDATE(object,sf)               (object).update(&object, sf); 
+#define CLEAN(object)                   (object).clean(&object);
 
-#define REGISTER(registrar,object_type,object); registrar.register##object_type(&registrar,object);
+#define REGISTER(registrar,object_type,object); registrar.register##object_type(&registrar,(object_type *) &object);
 
 #define FREE(object)            \
     if (object)                 \

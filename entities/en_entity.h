@@ -9,9 +9,9 @@
 #include "e_events.h"
 
 
-#define INIT_ENT(type,class,object)   \
-    strcpy(object->entity_type, type);\
-    object->update = class##_update;         \
+#define INIT_ENT(type,class,object)     \
+    strcpy(object->entity_type, type);  \
+    object->update = class##_update;    \
     object->clean  = class##_clean;     \
     object->notify = class##_notify;
 
@@ -29,7 +29,8 @@ CLASS(Entity,
 void    Entity_init(void *_self);
 void    Entity_update(void *_self, double sf);
 void    Entity_clean(void *_self);
-void    Entity_notify(void *_self, Event event);
+void    Entity_notify(void *_self, Event event);    // Notification from 
+                                                    // EventSubsystem
 
 
 

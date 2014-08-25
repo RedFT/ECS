@@ -12,6 +12,7 @@ void RenderManager_init(void *_self)
     INIT(Manager, self->parent); // init superclass
     
     INIT_MAN("rendermanager", RenderManager, self); // assign function pointers
+    self->registerApp = RenderManager_registerApp;
 }
 
 
@@ -43,6 +44,7 @@ void RenderManager_registerApp(void *_self, App *app)
     RenderManager *self = _self;
     self->app = app;
     self->sdl_ren = self->app->ren;
+    _INFO("Registered app to %s", self->manager_type);
 }
 
 

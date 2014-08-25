@@ -11,7 +11,7 @@ void     Entity_init(void *_self)
         return;
     Entity *self = _self;
     INIT_ENT("entity",Entity, self);
-    self->component_darray = g_array_new(TRUE, TRUE, sizeof(Component *));
+    self->component_darray = g_array_sized_new(FALSE, FALSE, sizeof(Component *), 10);
 }
 
 
@@ -91,5 +91,18 @@ void    Door_notify(void *_self, Event event)
     if (!_self)
         return;
     //Door *self = _self;
+    switch (event)
+    {
+        case OPEN_EVENT:
+            o();
+            break;
+        
+        case CLOSE_EVENT:
+            c();
+            break;
+        
+        default:
+            break;
+    }
     
 }

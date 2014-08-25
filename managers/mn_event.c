@@ -15,6 +15,9 @@ void EventManager_init(void *_self)
     
     INIT(KeyboardSubsystem, self->keyboard_ssys);
     INIT(MouseSubsystem, self->mouse_ssys);
+    
+    g_array_append_val(self->subsystem_darray, self->keyboard_ssys);
+    g_array_append_val(self->subsystem_darray, self->mouse_ssys);
 }
 
 
@@ -25,8 +28,16 @@ void EventManager_update(void *_self, double sf)
     EventManager *self = _self;
     SDL_PumpEvents();
     
-    UPDATE(self->keyboard_ssys, 0);
-    UPDATE(self->mouse_ssys, 0);
+    
+    Subsystem *tmp = NULL;
+    for (int i = 0; i < self->subsystem_darray->len; i++)
+    {
+        INFO("HERE");
+        tmp = &g_array_index(self->subsystem_darray, Subsystem, i);
+        _INFO("NAME: %s", tmp->subsystem_type);
+        UPDATE(*tmp, 0);
+        INFO("HEERE");
+    }
     
     self->keyboard = self->keyboard_ssys.keyboard;
     self->mouse    = self->mouse_ssys.mouse;
@@ -55,13 +66,4 @@ void EventManager_clean(void *_self)
     CLEAN(self->mouse_ssys);
     
     Manager_clean(&self->parent);
-}
-
-
-void EventManager_registerApp(void *_self, App *app)
-{
-    if (!_self)
-        return;
-    EventManager *self = _self;
-    self->app = app;
 }

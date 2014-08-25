@@ -26,7 +26,6 @@ CLASS_EXT(MouseSubsystem, Subsystem,
 void MouseSubsystem_init(void *_self);
 void MouseSubsystem_update(void *_self, double sf);
 void MouseSubsystem_clean(void *_self);
-void MouseSubsystem_registerEntity(void *_self, Entity *entity);
 
 #endif /* __SS_MOUSE_H__ */
 

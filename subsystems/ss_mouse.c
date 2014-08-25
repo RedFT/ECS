@@ -11,6 +11,7 @@ void MouseSubsystem_init(void *_self)
     INIT(Subsystem, self->parent);  // init superclass
     
     INIT_SUBSYS("mousesubsystem", MouseSubsystem, self);
+    _INFO("Initialized %s", self->subsystem_type);
 }
 
 
@@ -45,13 +46,4 @@ void MouseSubsystem_clean(void *_self)
     MouseSubsystem *self = _self;
     
     Subsystem_clean(&self->parent);
-}
-
-
-void MouseSubsystem_registerEntity(void *_self, Entity *entity)
-{
-    if (!_self)
-        return;
-    MouseSubsystem *self = _self;
-    Subsystem_registerEntity(self, entity);
 }

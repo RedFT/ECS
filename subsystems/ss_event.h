@@ -13,7 +13,6 @@ CLASS_EXT(EventSubsystem, Subsystem,
 void EventSubsystem_init(void *_self);
 void EventSubsystem_update(void *_self, double sf);
 void EventSubsystem_clean(void *_self);
-void EventSubsystem_registerEntity(void *_self, Entity *entity);
 
 
 void EventSubsystem_notify(void *_self, Event event);

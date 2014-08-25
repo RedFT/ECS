@@ -13,7 +13,7 @@
     strcpy(self->subsystem_type, type); \
     self->update = class##_update;      \
     self->clean  = class##_clean;       \
-    self->registerEntity = class##_registerEntity \
+    self->registerEntity = Subsystem_registerEntity \
 
 
 CLASS(Subsystem,

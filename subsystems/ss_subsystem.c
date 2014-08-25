@@ -8,7 +8,7 @@ void Subsystem_init(void *_self)
         return;
     Subsystem *self = _self;
     INIT_SUBSYS("subsystem", Subsystem, self);
-    self->entity_darray    = g_array_new(TRUE, TRUE, sizeof(Entity *));
+    self->entity_darray    = g_array_sized_new(FALSE, FALSE, sizeof(Entity *), 10);
 }
 
 void Subsystem_update(void *_self, double sf) // meant to be overridden
@@ -16,7 +16,7 @@ void Subsystem_update(void *_self, double sf) // meant to be overridden
     if (!_self)
         return;
     Subsystem *self = _self;
-    fprintf(stderr, "%s Update function unassigned\n", self->subsystem_type);
+    _INFO("%s Update function unassigned\n", self->subsystem_type);
 }
 
 void Subsystem_clean(void *_self)
@@ -35,4 +35,5 @@ void Subsystem_registerEntity(void *_self, Entity *entity)
         return;
     Subsystem *self = _self;
     g_array_append_val(self->entity_darray, entity);
+    _INFO("Added %s to %s's Entity List", entity->entity_type, self->subsystem_type);
 }

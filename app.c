@@ -13,13 +13,15 @@ int   App_init(App *self)
     int ret = SDL_Init(SDL_INIT_EVERYTHING);
     ERR(!ret, "%s", SDL_GetError());
     
-    
+    /* WINDOW */
     self->win = SDL_CreateWindow("Example",
             SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
             640, 480,
             SDL_WINDOW_SHOWN); // | SDL_WINDOW_OPENGL);
     ERR(self->win, "%s", SDL_GetError());
     
+    
+    /* RENDERER */
     self->ren = SDL_CreateRenderer(self->win,
             -1, 0);
     ERR(self->ren, "%s", SDL_GetError());
@@ -28,13 +30,15 @@ int   App_init(App *self)
     
     self->app_running = 1;
     self->clean = App_clean;
+    
+    /* MANAGERS */
     INIT(EventManager, self->event_manager);
-    //INIT(SceneManager, self->scene_manager);
+    INIT(SceneManager, self->scene_manager);
     INIT(RenderManager, self->render_manager);
     
-    REGISTER(self->event_manager, App, self);
-    //REGISTER(self->scene_manager, App, self);
-    REGISTER(self->render_manager, App, self);
+    REGISTER(self->event_manager, App, *self);
+    REGISTER(self->scene_manager, App, *self);
+    REGISTER(self->render_manager, App, *self);
     
     
     return 0;
@@ -48,12 +52,17 @@ int   App_run(App *self)
 {
     Door d;
     INIT(Door, d);
+    REGISTER(self->scene_manager, Entity, d);
+    REGISTER(self->scene_manager.event_ssys, Entity, d);
+    
     while (self->app_running)
     {
         UPDATE(self->event_manager, 0);
-        //UPDATE(self->scene_manager, 0);
+        UPDATE(self->scene_manager, 0);
         UPDATE(self->render_manager, 0);
+        self->scene_manager.event_ssys.notify(&d, OPEN_EVENT);
     }
+    
     CLEAN(d);
     
     return 0;
@@ -63,7 +72,7 @@ int   App_run(App *self)
 void  App_clean(App *self)
 {
     CLEAN(self->event_manager);
-    //CLEAN(self->scene_manager);
+    CLEAN(self->scene_manager);
     CLEAN(self->render_manager);
     
     if (self->ren)
