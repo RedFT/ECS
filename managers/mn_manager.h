@@ -23,8 +23,8 @@ typedef struct App App;
 CLASS(Manager,
     char manager_type[100];
     App *app;
-    GArray *subsystem_darray;
-    GArray *entity_darray;
+    GSList *subsystem_list;
+    GSList *entity_list;
     void (*update)(void *_self, double sf);
     void (*clean)(void *_self);
     void (*registerApp)(void *_self, App *app);

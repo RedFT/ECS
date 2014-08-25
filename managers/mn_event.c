@@ -16,8 +16,8 @@ void EventManager_init(void *_self)
     INIT(KeyboardSubsystem, self->keyboard_ssys);
     INIT(MouseSubsystem, self->mouse_ssys);
     
-    g_array_append_val(self->subsystem_darray, self->keyboard_ssys);
-    g_array_append_val(self->subsystem_darray, self->mouse_ssys);
+    REGISTER(self->parent, Subsystem, self->keyboard_ssys);
+    REGISTER(self->parent, Subsystem, self->mouse_ssys);
 }
 
 
@@ -29,15 +29,7 @@ void EventManager_update(void *_self, double sf)
     SDL_PumpEvents();
     
     
-    Subsystem *tmp = NULL;
-    for (int i = 0; i < self->subsystem_darray->len; i++)
-    {
-        INFO("HERE");
-        tmp = &g_array_index(self->subsystem_darray, Subsystem, i);
-        _INFO("NAME: %s", tmp->subsystem_type);
-        UPDATE(*tmp, 0);
-        INFO("HEERE");
-    }
+    Manager_update(self, 0);
     
     self->keyboard = self->keyboard_ssys.keyboard;
     self->mouse    = self->mouse_ssys.mouse;
@@ -46,12 +38,14 @@ void EventManager_update(void *_self, double sf)
     {
         if (self->app)
             self->app->app_running = 0;
+        INFO("QUITTING SDL_QUIT");
     }
     
     if (self->keyboard[SDL_SCANCODE_ESCAPE])
     {
         if (self->app)
             self->app->app_running = 0;
+        INFO("QUITTING ESCAPE PRESSED");
     }
 }
 

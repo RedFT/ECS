@@ -18,7 +18,7 @@
 
 CLASS(Subsystem,
     char   subsystem_type[100];
-	GArray *entity_darray;
+	GSList *entity_list;
 	void (*update)(void *_self, double sf);
 	void (*clean)(void *_self);
 	void (*registerEntity)(void *_self, Entity *entity);

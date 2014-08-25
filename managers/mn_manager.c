@@ -14,8 +14,8 @@ void     Manager_init(void *_self)
     INIT_MAN("manager", Manager, self);
     
     self->app = NULL;
-    self->subsystem_darray = g_array_sized_new(FALSE, FALSE, sizeof(Subsystem *), 10);
-    self->entity_darray    = g_array_sized_new(FALSE, FALSE, sizeof(Entity *), 10);
+    self->subsystem_list = NULL;
+    self->entity_list    = NULL;
 }
 
 
@@ -25,10 +25,10 @@ void     Manager_clean(void *_self)
         return;
     Manager *self = _self;
     
-    g_array_free(self->subsystem_darray, TRUE);
-    _INFO("Free'd Subsystem array for: %s", self->manager_type);
-    g_array_free(self->entity_darray, TRUE);
-    _INFO("Free'd Entity array for: %s", self->manager_type);
+    g_slist_free(self->subsystem_list);
+    _INFO("Free'd Subsystem list for: %s", self->manager_type);
+    g_slist_free(self->entity_list);
+    _INFO("Free'd Entity list for: %s", self->manager_type);
 }
 
 
@@ -36,7 +36,15 @@ void     Manager_update(void *_self, double sf)
 {
     if (!_self)
         return;
-    // Manager *self = _self;
+    Manager *self = _self;
+    Subsystem *ssys = NULL;
+    
+    GSList *iterator;
+    for (iterator = self->subsystem_list; iterator; iterator = iterator->next)
+    {
+        ssys = iterator->data;
+        UPDATE(*ssys, 0);
+    }
 }
 
 
@@ -56,8 +64,8 @@ void     Manager_registerSubsystem(void *_self, Subsystem *ssys)
     if (!_self)
         return;
     Manager *self = _self;
-    g_array_append_val(self->subsystem_darray, ssys);
-    _INFO("Added %s to %s's Subsystem List", ssys->subsystem_type, self->manager_type);
+    self->subsystem_list = g_slist_append(self->subsystem_list, ssys);
+    _INFO("Added %s to %s's Subsystem list", ssys->subsystem_type, self->manager_type);
 }
 
 
@@ -66,6 +74,6 @@ void     Manager_registerEntity(void *_self, Entity *ent)
     if (!_self)
         return;
     Manager *self = _self;
-    g_array_append_val(self->entity_darray, ent);
-    _INFO("Added %s to %s's Entity List", ent->entity_type, self->manager_type);
+    self->entity_list = g_slist_append(self->entity_list, ent);
+    _INFO("Added %s to %s's Entity list", ent->entity_type, self->manager_type);
 }

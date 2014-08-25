@@ -28,8 +28,6 @@ int   App_init(App *self)
     
     SDL_SetRenderDrawColor(self->ren, 0, 0, 0, 255);
     
-    self->app_running = 1;
-    self->clean = App_clean;
     
     /* MANAGERS */
     INIT(EventManager, self->event_manager);
@@ -40,6 +38,8 @@ int   App_init(App *self)
     REGISTER(self->scene_manager, App, *self);
     REGISTER(self->render_manager, App, *self);
     
+    self->clean = App_clean;
+    self->app_running = 1;
     
     return 0;
 error:
@@ -53,14 +53,28 @@ int   App_run(App *self)
     Door d;
     INIT(Door, d);
     REGISTER(self->scene_manager, Entity, d);
+    REGISTER(self->render_manager, Entity, d);
     REGISTER(self->scene_manager.event_ssys, Entity, d);
+    
+    SDL_Surface *tmp = IMG_Load("res/images/Pigeon64x32.png");
+    if (!tmp)
+        INFO("Couldn't Load IMG");
+    d.render_cmp.texture = SDL_CreateTextureFromSurface(self->ren, tmp);
+    if (!d.render_cmp.texture)
+        INFO("Couldn't Create TEX");
+        
+    d.render_cmp.src_rect.w = 64;
+    d.render_cmp.src_rect.h = 32;
+    d.render_cmp.dst_rect.x = 0;
+    d.render_cmp.dst_rect.y = 0;
+    d.render_cmp.dst_rect.w = 64;
+    d.render_cmp.dst_rect.h = 32;
     
     while (self->app_running)
     {
         UPDATE(self->event_manager, 0);
         UPDATE(self->scene_manager, 0);
         UPDATE(self->render_manager, 0);
-        self->scene_manager.event_ssys.notify(&d, OPEN_EVENT);
     }
     
     CLEAN(d);

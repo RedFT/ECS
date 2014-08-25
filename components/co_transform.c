@@ -1,16 +1,16 @@
 #include "co_transform.h"
 
 
-void        Transform_init(void *_self)
+void        TransformComponent_init(void *_self)
 {
     if (!_self)
         return;
-    Transform *self = _self;
+    TransformComponent *self = _self;
 	
 	INIT(Component, self->parent);
 	
 	
-    INIT_COMP("transform", Transform, self);
+    INIT_COMP("transformcomponent", TransformComponent, self);
 	
 	self->x = 0;
 	self->y = 0;
@@ -19,20 +19,20 @@ void        Transform_init(void *_self)
 }
 
 
-void       Transform_update(void *_self)
+void       TransformComponent_update(void *_self)
 {
     if (!_self)
         return;
-    //Transform *self = _self;
+    //TransformComponent *self = _self;
     
 }
 
 
-void       Transform_clean(void *_self)
+void       TransformComponent_clean(void *_self)
 {
     if (!_self)
         return;
-    Transform *self = _self;
+    TransformComponent *self = _self;
     
     Component_clean(&self->parent);
 }

@@ -23,8 +23,12 @@ typedef enum
 } ComponentType;
 */
 
+
+typedef struct Entity Entity;
+
+
 CLASS(Component,
-	// Object *object // Reference to the owning object
+	Entity *entity;             // reference to owner
 	char component_type[100];   // for ID'ing components
 	void (*update)(void *_self);
 	void (*clean)(void *_self);

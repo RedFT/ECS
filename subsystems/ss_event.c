@@ -21,8 +21,7 @@ void EventSubsystem_update(void *_self, double sf)
 {
     if (!_self)
         return;
-    EventSubsystem *self = _self;
-    _INFO("%s has %d entities", self->subsystem_type, self->entity_darray->len);
+    //EventSubsystem *self = _self;
 }
 
 
@@ -39,18 +38,19 @@ void EventSubsystem_clean(void *_self)
 
 
 
-void EventSubsystem_notify(void *_self, Event event)
+void EventSubsystem_notify(void *_self, Entity *entity, Event event)
 {
     if (!_self)
         return;
     EventSubsystem *self = _self;
     
+    //_INFO("%s's Entity list has %d entities", self->subsystem_type, g_slist_length(self->entity_list));
     Entity *ent = NULL;
-    for (int i = 0; i < self->entity_darray->len; i++)
+    GSList *iterator;
+    for (iterator = self->entity_list; iterator; iterator = iterator->next)
     {
         
-        ent = &g_array_index(self->entity_darray, Entity, i);
-        _INFO("Notifying %s of event", ent->entity_type);
-        ent->notify((*ent), event);
+        ent = iterator->data;
+        ent->notify(ent, entity, event);
     }
 }

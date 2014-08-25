@@ -4,8 +4,8 @@
 #include "co_component.h"
 
 
-// -- Physics -- //
-CLASS_EXT(Physics, Component,
+// -- PhysicsComponent -- //
+CLASS_EXT(PhysicsComponent, Component,
 	double vx;  // velocity in x plane
 	double vy;  // velocity in y plane
 	double ax;  // acceleration in x plane
@@ -14,9 +14,9 @@ CLASS_EXT(Physics, Component,
 	double max_y; // max velocity in y plane
 )
 
-void        Physics_init(void *_self);
-void        Physics_update(void *_self);
-void        Physics_clean(void *_self);
+void        PhysicsComponent_init(void *_self);
+void        PhysicsComponent_update(void *_self);
+void        PhysicsComponent_clean(void *_self);
 
 
 #endif /* __CO_PHYSICS_H__ */

@@ -4,15 +4,15 @@
 #include "co_component.h"
 
 
-// -- Transform -- //
-CLASS_EXT(Transform, Component,
+// -- TransformComponent -- //
+CLASS_EXT(TransformComponent, Component,
 	double x, y;
 	double rot, size;
 )
 
-void       Transform_init(void *_self);
-void       Transform_update(void *_self);
-void       Transform_clean(void *_self);
+void       TransformComponent_init(void *_self);
+void       TransformComponent_update(void *_self);
+void       TransformComponent_clean(void *_self);
 
 #endif /* __CO_TRANSFORM_H__ */
 

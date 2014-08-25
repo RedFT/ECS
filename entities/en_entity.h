@@ -13,24 +13,28 @@
     strcpy(object->entity_type, type);  \
     object->update = class##_update;    \
     object->clean  = class##_clean;     \
-    object->notify = class##_notify;
+    object->notify = class##_notify;    \
+    object->getComponent = Entity_getComponent;
 
 
 /* -------- Entity -------- */
 CLASS(Entity,
     char entity_type[100];
-	GArray *component_darray;
+	GSList *component_list;
 	void (*update)(void *_self, double sf);
 	void (*clean)(void *_self);
-	void (*notify)(void *_self, Event event);
+	void (*notify)(void *_self, struct Entity *entity, Event event);
+	void *(*getComponent)(void *_self, char *component_type);
 ) 
 
 
 void    Entity_init(void *_self);
 void    Entity_update(void *_self, double sf);
 void    Entity_clean(void *_self);
-void    Entity_notify(void *_self, Event event);    // Notification from 
-                                                    // EventSubsystem
+void    Entity_notify(void *_self, Entity *entity, Event event);    // Notification from 
+                                                                    // EventSubsystem
+                                                                    
+void    *Entity_getComponent(void *_self, char *component_type);                                                                
 
 
 
@@ -39,9 +43,9 @@ CLASS_EXT(Door, Entity,
 	void (*open)();
 	void (*close)();
 	
-	Transform transform;
-	Physics   physics;
-	Renderer  renderer;
+	TransformComponent transform_cmp;
+	PhysicsComponent   physics_cmp;
+	RenderComponent    render_cmp;
 )
 
 
@@ -51,7 +55,7 @@ void c();
 void    Door_init(void *_self);
 void    Door_update(void *_self, double sf);
 void    Door_clean(void *_self);
-void    Door_notify(void *_self, Event event);
+void    Door_notify(void *_self, Entity *entity, Event event);
 
 
 #endif /* __ENTITY_H__ */

@@ -12,7 +12,14 @@ void RenderManager_init(void *_self)
     INIT(Manager, self->parent); // init superclass
     
     INIT_MAN("rendermanager", RenderManager, self); // assign function pointers
-    self->registerApp = RenderManager_registerApp;
+    
+    self->registerApp       = RenderManager_registerApp;
+    self->registerSubsystem = RenderManager_registerSubsystem;
+    self->registerEntity    = RenderManager_registerEntity;
+    
+    INIT(RenderSubsystem, self->render_ssys);
+    
+    REGISTER(self->parent, Subsystem, self->render_ssys);
 }
 
 
@@ -22,6 +29,7 @@ void RenderManager_update(void *_self, double sf)
         return;
     RenderManager *self = _self;
     
+    Manager_update(self, 0);
     
     RenderManager_renderScreen(self);
 }
@@ -45,6 +53,31 @@ void RenderManager_registerApp(void *_self, App *app)
     self->app = app;
     self->sdl_ren = self->app->ren;
     _INFO("Registered app to %s", self->manager_type);
+}
+
+
+void     RenderManager_registerSubsystem(void *_self, Subsystem *ssys)
+{
+    if (!_self)
+        return;
+    RenderManager *self = _self;
+    Manager_registerSubsystem(self, ssys);
+    if (!strcmp(ssys->subsystem_type, "rendercomponent"))
+    {
+        ((RenderSubsystem *) ssys)->sdl_ren = self->sdl_ren;
+    }
+}
+
+
+void     RenderManager_registerEntity(void *_self, Entity *ent)
+{
+    if (!_self)
+        return;
+    RenderManager *self = _self;
+    
+    Manager_registerEntity(_self, ent);
+    
+    REGISTER(self->render_ssys, Entity, ent);
 }
 
 

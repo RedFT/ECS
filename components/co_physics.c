@@ -1,16 +1,16 @@
 #include "co_physics.h"
 
 
-void        Physics_init(void *_self)
+void        PhysicsComponent_init(void *_self)
 {
     if (!_self)
         return;
-    Physics *self = _self;
+    PhysicsComponent *self = _self;
     
     INIT(Component, self->parent);
     
     
-	INIT_COMP("physics", Physics, self);
+	INIT_COMP("physicscomponent", PhysicsComponent, self);
 	
 	self->vx        = 0;
 	self->vy        = 0;
@@ -20,19 +20,19 @@ void        Physics_init(void *_self)
 	self->max_y     = 0;
 }
 
-void       Physics_update(void *_self)
+void       PhysicsComponent_update(void *_self)
 {
     if (!_self)
         return;
-    // Physics *self = _self;
+    // PhysicsComponent *self = _self;
 }
 
 
-void       Physics_clean(void *_self)
+void       PhysicsComponent_clean(void *_self)
 {
     if (!_self)
         return;
-    Physics *self = _self;
+    PhysicsComponent *self = _self;
     
     Component_clean(&self->parent);
 }

@@ -1,4 +1,5 @@
 #include "co_component.h"
+#include "en_entity.h"
 
 
 
@@ -7,7 +8,7 @@ void        Component_init(void *_self)
     if (!_self)
         return;
     Component *self = _self;
-    INIT_COMP("normal", Component, self);
+    INIT_COMP("component", Component, self);
 }
 
       
