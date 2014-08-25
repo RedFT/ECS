@@ -6,15 +6,14 @@
 
 #include "ooc.h"
 #include "constants.h"
-#include "manager.h"
+#include "eventmanager.h"
 
 
 CLASS(App,
     int app_running;
     SDL_Window *win;
     SDL_Renderer *ren;
-    Manager      manager;
-    // EventManager event_manager;
+    EventManager event_manager;
     
     
     void (*clean)(App *self);

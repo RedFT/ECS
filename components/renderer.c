@@ -8,10 +8,7 @@ void      Renderer_init(void *_self)
     Renderer *self = _self;
     
     INIT(Component, self->parent);
-    INIT_COMP(RENDERER, Renderer, self);
-    self->component_type = RENDERER;
-	self->update = Renderer_update;
-	self->clean  = Renderer_clean;
+    INIT_COMP("renderer", Renderer, self);
 }
 
 

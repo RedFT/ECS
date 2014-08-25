@@ -5,7 +5,9 @@
 
 #include "ooc.h"
 
-#define INIT_MAN(class,object)               \
+
+#define INIT_MAN(type,class,object)               \
+    strcpy(object->manager_type, type);      \
     object->update      = class##_update;    \
     object->clean       = class##_clean;     \
     object->registerApp = class##_registerApp;
@@ -13,6 +15,7 @@
 typedef struct App App;
 
 CLASS(Manager,
+    char manager_type[100];
     App *app;
     GArray *subsystem_darray;
     GArray *entity_darray;

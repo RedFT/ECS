@@ -11,8 +11,8 @@ int   App_init(App *self)
         return 1;
     self->app_running = 1;
     self->clean = App_clean;
-    INIT(Manager, self->manager);
-    REGISTER(self->manager, App, self);
+    INIT(EventManager, self->event_manager);
+    REGISTER(self->event_manager, App, self);
     
     
     /*
@@ -39,7 +39,7 @@ int   App_run(App *self)
     INIT(Door, d);
     while (self->app_running)
     {
-        UPDATE(self->manager, 0);
+        UPDATE(self->event_manager, 0);
     }
     CLEAN(d);
     
@@ -49,7 +49,7 @@ int   App_run(App *self)
 
 void  App_clean(App *self)
 {
-    CLEAN(self->manager);
+    CLEAN(self->event_manager);
     SDL_Quit();
 }
 

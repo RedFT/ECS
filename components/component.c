@@ -7,7 +7,7 @@ void        Component_init(void *_self)
     if (!_self)
         return;
     Component *self = _self;
-    INIT_COMP(COMPONENT, Component, self);
+    INIT_COMP("normal", Component, self);
 }
 
       

@@ -2,15 +2,17 @@
 #define __COMPONENT_H__
 
 #include "ooc.h"
+#include <string.h>
 
 #define INIT_COMP(type,class,object)   \
-    self->component_type = type;            \
+    strcpy(self->component_type, type);           \
     object->update = class##_update;         \
     object->clean  = class##_clean;
     
 
 /* ------- Component -------*/
 // COMPONENT_TYPE enum -- used to ID components
+/*
 typedef enum
 {
     COMPONENT = 0,
@@ -19,10 +21,11 @@ typedef enum
 	PHYSICS,
 	COMPONENT_TYPE_N
 } ComponentType;
+*/
 
 CLASS(Component,
 	// Object *object // Reference to the owning object
-	ComponentType component_type;   // for ID'ing components
+	char component_type[100];   // for ID'ing components
 	void (*update)(void *_self);
 	void (*clean)(void *_self);
 )

@@ -8,10 +8,7 @@ void        Transform_init(void *_self)
     Transform *self = _self;
 	
 	INIT(Component, self->parent);
-    INIT_COMP(TRANSFORM, Transform, self);
-    self->component_type = TRANSFORM;
-	self->update = Transform_update;
-	self->clean  = Transform_clean;
+    INIT_COMP("transform", Transform, self);
 	
 	self->x = 0;
 	self->y = 0;

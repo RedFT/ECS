@@ -9,7 +9,7 @@ void        Physics_init(void *_self)
     
     INIT(Component, self->parent);
     
-	INIT_COMP(PHYSICS, Physics, self);
+	INIT_COMP("physics", Physics, self);
 	
 	self->vx        = 0;
 	self->vy        = 0;

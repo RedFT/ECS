@@ -8,13 +8,15 @@
 #include "components/renderer.h"
 
 
-#define INIT_ENT(class,object)   \
+#define INIT_ENT(type,class,object)   \
+    strcpy(object->entity_type, type);\
     object->update = class##_update;         \
     object->clean  = class##_clean;
 
 
 /* -------- Entity -------- */
 CLASS(Entity,
+    char entity_type[100];
 	GArray *component_darray;
 	void (*update)(void *_self, double sf);
 	void (*clean)(void *_self);

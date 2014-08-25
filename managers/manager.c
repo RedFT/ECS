@@ -14,7 +14,7 @@ void     Manager_init(void *_self)
     self->app = NULL;
     self->subsystem_darray = g_array_new(TRUE, TRUE, sizeof(Subsystem *));
     self->entity_darray    = g_array_new(TRUE, TRUE, sizeof(Entity *));
-    INIT_MAN(Manager, self);
+    INIT_MAN("manager", Manager, self);
 }
 
 

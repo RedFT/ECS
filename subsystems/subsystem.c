@@ -1,22 +1,31 @@
 #include "subsystem.h"
+#include "debug.h"
 
 
-Subsystem *Subsystem_new()
+
+void Subsystem_init(void *_self)
 {
-    Subsystem *self = malloc(sizeof(Subsystem));
+    if (!_self)
+        return;
+    Subsystem *self = _self;
+    strcpy(self->subsystem_name, "subsystem");
     self->entity_darray = g_array_new(TRUE, TRUE, sizeof(Component *));
-    return self;
 }
 
-void Subsystem_update(void *_self, float sf) // meant to be overridden
+void Subsystem_update(void *_self, double sf) // meant to be overridden
 {
-    //Subsystem *self = _self;
-    fprintf(stderr, "Update function unassigned\n");
+    if (!_self)
+        return;
+    Subsystem *self = _self;
+    fprintf(stderr, "%s Update function unassigned\n", self->subsystem_name);
 }
 
-void Subsystem_delete(void *_self)
+void Subsystem_clean(void *_self)
 {
+    
+    if (!_self)
+        return;
     Subsystem *self = _self;
     g_array_free(self->entity_darray, TRUE);
-    FREE(self);
+    INFO("Cleaned up subsystem");
 }

@@ -8,7 +8,7 @@ void     Entity_init(void *_self)
     if (!_self)
         return;
     Entity *self = _self;
-    INIT_ENT(Entity, self);
+    INIT_ENT("entity",Entity, self);
     self->component_darray = g_array_new(TRUE, TRUE, sizeof(Component *));
 }
 
@@ -50,7 +50,7 @@ void     Door_init(void *_self)
     
     INIT(Entity, self->parent); // init super class
     
-    INIT_ENT(Door, self);
+    INIT_ENT("door", Door, self);
     
     
 	INIT(Transform, self->transform);

@@ -2,14 +2,18 @@
 #define __EVENTMANAGER_H__
 
 #include "manager.h"
+#include "keyboardsubsystem.h"
+#include "mousesubsystem.h"
+
+
 
 CLASS_EXT(EventManager, Manager,
-    /*
+    
     KeyboardSubsystem keyboard_ssys;
-    MouseSubsystem    mouse_ssys;
     const Uint8       *keyboard;        // Using SDL_GetKeyboardState(NULL);
+    
+    MouseSubsystem    mouse_ssys;
     int               mouse[5];         // Using SDL_GetMouseState(&mouse[4], &mouse[5]);
-     */
 )
 
 
