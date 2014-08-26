@@ -7,8 +7,7 @@
 
 int   App_init(App *self)
 {
-    if (!self)
-        return 1;
+    ERR(self, "%s", "App is NULL");
     
     int ret = SDL_Init(SDL_INIT_EVERYTHING);
     ERR(!ret, "%s", SDL_GetError());
@@ -52,19 +51,21 @@ int   App_run(App *self)
 {
     Door d;
     INIT(Door, d);
-    REGISTER(self->scene_manager, Entity, d);
+    REGISTER(self->scene_manager,  Entity, d);
     REGISTER(self->render_manager, Entity, d);
-    REGISTER(self->scene_manager.event_ssys, Entity, d);
+    REGISTER(self->render_manager.render_ssys, Entity, d);
     
     SDL_Surface *tmp = IMG_Load("res/images/Pigeon64x32.png");
     if (!tmp)
         INFO("Couldn't Load IMG");
+        
     d.render_cmp.texture = SDL_CreateTextureFromSurface(self->ren, tmp);
     if (!d.render_cmp.texture)
         INFO("Couldn't Create TEX");
         
     d.render_cmp.src_rect.w = 64;
     d.render_cmp.src_rect.h = 32;
+    
     d.render_cmp.dst_rect.x = 0;
     d.render_cmp.dst_rect.y = 0;
     d.render_cmp.dst_rect.w = 64;

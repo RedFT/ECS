@@ -14,7 +14,8 @@
     object->update = class##_update;    \
     object->clean  = class##_clean;     \
     object->notify = class##_notify;    \
-    object->getComponent = Entity_getComponent;
+    object->getComponent = Entity_getComponent;\
+    object->registerComponent = Entity_registerComponent;
 
 
 /* -------- Entity -------- */
@@ -25,6 +26,7 @@ CLASS(Entity,
 	void (*clean)(void *_self);
 	void (*notify)(void *_self, struct Entity *entity, Event event);
 	void *(*getComponent)(void *_self, char *component_type);
+	void (*registerComponent)(void *_self, Component *component);
 ) 
 
 
@@ -33,6 +35,7 @@ void    Entity_update(void *_self, double sf);
 void    Entity_clean(void *_self);
 void    Entity_notify(void *_self, Entity *entity, Event event);    // Notification from 
                                                                     // EventSubsystem
+void    Entity_registerComponent(void *_self, Component *component);
                                                                     
 void    *Entity_getComponent(void *_self, char *component_type);                                                                
 

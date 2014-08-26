@@ -15,7 +15,7 @@ void RenderManager_init(void *_self)
     
     self->registerApp       = RenderManager_registerApp;
     self->registerSubsystem = RenderManager_registerSubsystem;
-    self->registerEntity    = RenderManager_registerEntity;
+    //self->registerEntity    = RenderManager_registerEntity;
     
     INIT(RenderSubsystem, self->render_ssys);
     
@@ -52,6 +52,18 @@ void RenderManager_registerApp(void *_self, App *app)
     RenderManager *self = _self;
     self->app = app;
     self->sdl_ren = self->app->ren;
+    
+    Subsystem *ssys = NULL;
+    GSList *iterator = NULL;
+    /* FIND AND ASSIGN AN SDL_Renderer TO THE RENDERING SUBSYSTEM */
+    for (iterator = self->subsystem_list; iterator; iterator = iterator->next)
+    {
+        ssys = iterator->data;
+        if (!strcmp(ssys->subsystem_type, "rendersubsystem"))
+        {
+            ((RenderSubsystem *) ssys)->sdl_ren = self->sdl_ren;
+        }
+    }
     _INFO("Registered app to %s", self->manager_type);
 }
 
@@ -62,10 +74,6 @@ void     RenderManager_registerSubsystem(void *_self, Subsystem *ssys)
         return;
     RenderManager *self = _self;
     Manager_registerSubsystem(self, ssys);
-    if (!strcmp(ssys->subsystem_type, "rendercomponent"))
-    {
-        ((RenderSubsystem *) ssys)->sdl_ren = self->sdl_ren;
-    }
 }
 
 
@@ -75,7 +83,10 @@ void     RenderManager_registerEntity(void *_self, Entity *ent)
         return;
     RenderManager *self = _self;
     
-    Manager_registerEntity(_self, ent);
+    //Manager_registerEntity(self, ent);
+    self->entity_list = g_slist_append(self->entity_list, ent);
+    _INFO("Added %s to %s's Entity list", ent->entity_type, self->manager_type);
+    
     
     REGISTER(self->render_ssys, Entity, ent);
 }

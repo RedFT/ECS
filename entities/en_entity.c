@@ -43,7 +43,6 @@ void    Entity_notify(void *_self, Entity *entity, Event event)
 
 void    *Entity_getComponent(void *_self, char *component_type)
 {
-    INFO("getComponent invoked!");
     if (!_self)
         return NULL;
     Entity *self = _self;
@@ -51,18 +50,26 @@ void    *Entity_getComponent(void *_self, char *component_type)
     Component *cmp = NULL;
     GSList *iterator = NULL;
     
-    _INFO("Attempting to retrieve %s", component_type);
     for (iterator = self->component_list; iterator; iterator = iterator->next)
     {
         cmp = iterator->data;
-        _INFO("Comparing %s and %s", cmp->component_type, component_type);
         if (!strcmp(cmp->component_type, component_type))
         {
             return cmp;
         }
     }
-    
     return NULL;
+}
+
+
+void    Entity_registerComponent(void *_self, Component *component)
+{
+    if (!_self)
+        return;
+    Entity *self = _self;
+    
+    self->component_list = g_slist_append(self->component_list, component);
+    _INFO("Added %s to %s's Component list", component->component_type, self->entity_type); 
 }
 
 
@@ -91,6 +98,10 @@ void     Door_init(void *_self)
 	INIT(TransformComponent, self->transform_cmp);
     INIT(PhysicsComponent,   self->physics_cmp);
 	INIT(RenderComponent,    self->render_cmp);
+	
+	REGISTER(self->parent, Component, self->transform_cmp);
+	REGISTER(self->parent, Component, self->physics_cmp);
+	REGISTER(self->parent, Component, self->render_cmp);
 }
 
 
