@@ -1,3 +1,17 @@
+HOW TO BUILD
+===
+
+! this build process depends on CMake
+
+run either 
+$ make debug 
+or
+$ make release
+
+then run
+$ ./ECS in the root project directory
+
+
 ECS
 ===
 

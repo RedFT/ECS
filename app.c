@@ -24,7 +24,6 @@ int   App_init(App *self)
     self->ren = SDL_CreateRenderer(self->win,
             -1, 0);
     ERR(self->ren, "%s", SDL_GetError());
-    
     SDL_SetRenderDrawColor(self->ren, 0, 0, 0, 255);
     
     

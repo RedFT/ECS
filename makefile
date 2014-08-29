@@ -1,36 +1,13 @@
-CC=gcc
-SYMBOLS=-D_GNU_SOURCE
-CFLAGS=-c -Wall -fms-extensions -pedantic -std=c11 `pkg-config --cflags sdl2 glib-2.0`
-LDFLAGS=`pkg-config --libs sdl2 glib-2.0 ` -lSDL2_image -lSDL2_mixer \
-	-lSDL2_net -lSDL2_ttf
-
-SRC_DIR=./ ./components/ ./entities/ ./subsystems/ ./managers/
-INCLUDES=$(foreach dir, $(SRC_DIR), -I$(dir))
-SOURCES=$(foreach dir, $(SRC_DIR), $(wildcard $(dir)*.c))
-HEADERS:=$(filter-out ./main.h,$(SOURCES:.c=.h))
+GEDIT_GARBAGE=$(wildcard ./*~)
+VIM_GARBAGE=$(wildcard ./.*.swp)
 
 
-# clean up stuff so as not to dirty up the git repo :)
-VIM_GARBAGE:=$(foreach dir, $(SRC_DIR), $(dir).*.swp)
-GEDIT_GARBAGE:=$(foreach dir, $(SRC_DIR), $(dir)*~)
-OBJECTS=$(SOURCES:.c=.o)
-EXE=Game
+debug:
+	cd build/debug && cmake ../.. -DDEBUG=1 -DCMAKE_BUILD_TYPE=Debug && make && cd ../..
 
-EXE: $(HEADERS) $(SOURCES) $(OBJECTS)
-	$(CC) -o $(EXE) $(OBJECTS) $(LDFLAGS)
-
-%.o: %.c
-	$(CC) $(SYMBOLS) $(INCLUDES) $(CFLAGS) $< -o $@
+release:
+	cd build/release && cmake ../.. -DDEBUG=0 -DCMAKE_BUILD_TYPE=Release && make && cd ../..
 
 clean:
-	rm $(VIM_GARBAGE) $(GEDIT_GARBAGE) $(OBJECTS) $(EXE) -rf
-
-again:
-	@make clean && make
-
-info:
-	@echo SOURCES: $(SOURCES)
-	@echo HEADERS: $(HEADERS)
-	@echo VIM_GARBAGE: $(VIM_GARBAGE)
-	@echo GEDIT_GARBAGE: $(GEDIT_GARBAGE)
+	rm -rf build/*/* ./ECS $(GEDIT_GARBAGE) $(VIM_GARBAGE)
 	
