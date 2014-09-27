@@ -3,15 +3,15 @@ HOW TO BUILD
 
 From the terminal, execute either:
 
-    make debug 
+    $ make debug 
 
 or:
 
-    make release
+    $ make release
 
 then in the root project directory, execute:
 
-    ./ECS 
+    $ ./ECS 
 
 
 DEPENDENCIES
