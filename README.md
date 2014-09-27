@@ -1,20 +1,20 @@
 HOW TO BUILD
 ===
 
-run either 
-        $ make debug 
-or
-        $ make release
+run either:
+    $ make debug 
+or:
+    $ make release
 
-then run
-        $ ./ECS 
+then run:
+    $ ./ECS 
 in the root project directory
 
 
 DEPENDENCIES
 ===
 
-cmake sdl2 sdl2_image glib2 make gcc
+    cmake sdl2 sdl2_image glib2 make gcc
 
 
 ECS
