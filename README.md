@@ -1,3 +1,9 @@
+DEPENDENCIES
+===
+
+    cmake sdl2 sdl2_image glib2 make gcc
+
+
 HOW TO BUILD
 ===
 
@@ -14,10 +20,6 @@ then in the root project directory, execute:
     $ ./ECS 
 
 
-DEPENDENCIES
-===
-
-    cmake sdl2 sdl2_image glib2 make gcc
 
 
 ECS
