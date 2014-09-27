@@ -2,12 +2,13 @@ HOW TO BUILD
 ===
 
 run either 
-$ make debug 
+        $ make debug 
 or
-$ make release
+        $ make release
 
 then run
-$ ./ECS in the root project directory
+        $ ./ECS 
+in the root project directory
 
 
 DEPENDENCIES
