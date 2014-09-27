@@ -23,3 +23,4 @@
 #define IN_RANGE_EXC(x,min,max) (x >= min && x <= max)
 
 #endif /* __HELPERS_H__ */
+
