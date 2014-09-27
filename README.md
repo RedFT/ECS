@@ -1,8 +1,6 @@
 HOW TO BUILD
 ===
 
-! this build process depends on CMake
-
 run either 
 $ make debug 
 or
@@ -10,6 +8,12 @@ $ make release
 
 then run
 $ ./ECS in the root project directory
+
+
+DEPENDENCIES
+===
+
+cmake sdl2 sdl2_image glib2 make gcc
 
 
 ECS
