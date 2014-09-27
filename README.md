@@ -1,13 +1,13 @@
 HOW TO BUILD
 ===
 
-run either:
-    $ make debug 
+From the terminal, execute either:
+    make debug 
 or:
-    $ make release
+    make release
 
-then run:
-    $ ./ECS 
+then execute:
+    ./ECS 
 in the root project directory
 
 
