@@ -8,8 +8,8 @@
 #define UPDATE(object,sf)               (object).update(&object, sf); 
 #define CLEAN(object)                   (object).clean(&object);
 
-#define REGISTER(registrar,object_type,object) \
-    (registrar).register##object_type((&registrar),(object_type *) &object);
+#define REGISTER(enroller,object_type,object) \
+    (enroller).register##object_type((&enroller),(object_type *) &object);
 
 #define FREE(object)            \
     if (object)                 \

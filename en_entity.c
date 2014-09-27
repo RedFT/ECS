@@ -69,7 +69,7 @@ void    Entity_registerComponent(void *_self, Component *component)
     Entity *self = _self;
     
     self->component_list = g_slist_append(self->component_list, component);
-    REGISTER(*component, Entity, self)
+    REGISTER(*component, Entity, *self)
     _INFO("Added %s to %s's Component list", component->component_type, self->entity_type);
 }
 
