@@ -1,5 +1,5 @@
 #include "co_transform.h"
-
+#include "debug.h"
 
 void        TransformComponent_init(void *_self)
 {
@@ -11,7 +11,7 @@ void        TransformComponent_init(void *_self)
 	
 	
     INIT_COMP("transformcomponent", TransformComponent, self);
-	
+	INFO("INITIALIZED TRANSFORM_COMPONENT");
 	self->x = 0;
 	self->y = 0;
 	self->rot = 0;

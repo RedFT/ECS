@@ -17,7 +17,8 @@
     else                        \
         fprintf(stderr, "%s : %d :: Tried to free null ptr\n", __FILE__, __LINE__)
 
-
+#define NOTIFY(notifier,src_ent,event_type) \
+    ((notifier).notify(&notifier,src_ent,event_type))
 
 #define IN_RANGE_INC(x,min,max) (x >  min && x <  max)
 #define IN_RANGE_EXC(x,min,max) (x >= min && x <= max)

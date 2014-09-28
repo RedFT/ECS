@@ -15,6 +15,8 @@ void RenderSubsystem_init(void *_self)
     self->sdl_ren = NULL;
     INIT_SUBSYS("rendersubsystem", RenderSubsystem, self);
     
+    self->registerEntity = RenderSubsystem_registerEntity;
+    
     _INFO("Initialized %s", self->subsystem_type);
 }
 
@@ -25,8 +27,8 @@ void RenderSubsystem_update(void *_self, double sf)
         return;
     RenderSubsystem *self = _self;
     
-    Entity *ent;
-    GSList *iterator;
+    Entity *ent = NULL;
+    GSList *iterator = NULL;
     RenderComponent *render_cmp = NULL;
     for (iterator = self->entity_list; iterator; iterator = iterator->next)
     {
@@ -57,4 +59,25 @@ void RenderSubsystem_clean(void *_self)
     RenderSubsystem *self = _self;
     
     Subsystem_clean(&self->parent);
+}
+
+
+void RenderSubsystem_registerEntity(void *_self, Entity *entity)
+{
+    if (!_self)
+        return;
+    RenderSubsystem *self = _self;
+    RenderComponent *ren_cmp = entity->getComponent(entity, "rendercomponent");
+    if (ren_cmp)
+    {
+        INFO("FOUND RenderComponent");
+        ren_cmp->ren = self->sdl_ren;
+        entity->load(entity);
+    }
+    else
+    {
+        INFO("Couldn't find RenderComponent");
+    }
+    self->entity_list = g_slist_append(self->entity_list, entity);
+    _INFO("Added %s to %s's Entity list", entity->entity_type, self->subsystem_type);
 }

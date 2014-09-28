@@ -13,4 +13,6 @@ CLASS_EXT(KeyboardSubsystem, Subsystem,
 void KeyboardSubsystem_init(void *_self);
 void KeyboardSubsystem_update(void *_self, double sf);
 void KeyboardSubsystem_clean(void *_self);
+
+
 #endif /* __SS_KEYBOARD_H__ */

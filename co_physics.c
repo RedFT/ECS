@@ -14,10 +14,10 @@ void        PhysicsComponent_init(void *_self)
 	
 	self->vx        = 0;
 	self->vy        = 0;
-	self->ax        = 0;
-	self->ay        = 0;
-	self->max_x     = 0;
-	self->max_y     = 0;
+	self->ax        = .5;
+	self->ay        = .5;
+	self->max_x     = 5;
+	self->max_y     = 5;
 }
 
 void       PhysicsComponent_update(void *_self)

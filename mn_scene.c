@@ -15,6 +15,12 @@ void SceneManager_init(void *_self)
     self->registerApp = SceneManager_registerApp;
     
     INIT(EventSubsystem, self->event_ssys);
+    INIT(MovementSubsystem, self->move_ssys);
+    
+    
+    REGISTER(self->parent, Subsystem, self->event_ssys);
+    REGISTER(self->parent, Subsystem, self->move_ssys);
+    _INFO("Initialized %s", self->manager_type);
 }
 
 
@@ -22,7 +28,18 @@ void SceneManager_update(void *_self, double sf)
 {
     if (!_self)
         return;
-    //SceneManager *self = _self;
+    SceneManager *self = _self;
+    
+    Manager_update(&self->parent, sf);
+    
+    Entity *ent = NULL;
+    GSList *iterator = NULL;
+    /* Update all entities registered to this */
+    for (iterator = self->entity_list; iterator; iterator = iterator->next)
+    {
+        ent = iterator->data;
+        ent->update(ent, 0);
+    }
 }
 
 
@@ -32,8 +49,7 @@ void SceneManager_clean(void *_self)
         return;
     SceneManager *self = _self;
     
-    
-    CLEAN(self->event_ssys);
+    //CLEAN(self->event_ssys);
     
     Manager_clean(&self->parent);
 }

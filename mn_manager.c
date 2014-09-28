@@ -25,6 +25,15 @@ void     Manager_clean(void *_self)
         return;
     Manager *self = _self;
     
+    Subsystem *ssys = NULL;
+    GSList *iterator = NULL;
+    /* FIND AND ASSIGN AN SDL_Renderer TO THE RENDERING SUBSYSTEM */
+    for (iterator = self->subsystem_list; iterator; iterator = iterator->next)
+    {
+        ssys = iterator->data;
+        CLEAN(*ssys);
+    }
+    
     g_slist_free(self->subsystem_list);
     _INFO("Free'd Subsystem list for: %s", self->manager_type);
     g_slist_free(self->entity_list);
@@ -75,5 +84,13 @@ void     Manager_registerEntity(void *_self, Entity *ent)
         return;
     Manager *self = _self;
     self->entity_list = g_slist_append(self->entity_list, ent);
+    Subsystem *ssys = NULL;
+    
+    GSList *iterator;
+    for (iterator = self->subsystem_list; iterator; iterator = iterator->next)
+    {
+        ssys = iterator->data;
+        REGISTER(*ssys, Entity, *ent);
+    }
     _INFO("Added %s to %s's Entity list", ent->entity_type, self->manager_type);
 }

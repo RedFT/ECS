@@ -6,6 +6,7 @@ void      RenderComponent_init(void *_self)
     if (!_self)
         return;
     RenderComponent *self = _self;
+    self->ren = NULL;
     
     INIT(Component, self->parent);
     

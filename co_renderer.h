@@ -10,7 +10,8 @@
 // -- RenderComponent -- //
 CLASS_EXT(RenderComponent,Component,
     char image_filename[100];
-	SDL_Texture *texture;
+    SDL_Renderer *ren;
+	SDL_Texture  *texture;
 	SDL_Rect     src_rect;
 	SDL_Rect     dst_rect;
 )
@@ -18,6 +19,8 @@ CLASS_EXT(RenderComponent,Component,
 void        RenderComponent_init(void *_self);
 void        RenderComponent_update(void *_self);
 void        RenderComponent_clean(void *_self);
+
+
 
 
 #endif /* __CO_RENDERER_H__ */

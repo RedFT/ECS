@@ -14,6 +14,7 @@
     object->update = class##_update;    \
     object->clean  = class##_clean;     \
     object->notify = class##_notify;    \
+    object->load   = class##_load;      \
     object->getComponent = Entity_getComponent;\
     object->registerComponent = Entity_registerComponent;
 
@@ -24,7 +25,8 @@ CLASS(Entity,
 	GSList *component_list;
 	void (*update)(void *_self, double sf);
 	void (*clean)(void *_self);
-	void (*notify)(void *_self, struct Entity *entity, Event event);
+	void (*load)(void *_self);
+	void (*notify)(void *_self, struct Entity *entity, char *event);
 	void *(*getComponent)(void *_self, char *component_type);
 	void (*registerComponent)(void *_self, Component *component);
 ) 
@@ -33,7 +35,8 @@ CLASS(Entity,
 void    Entity_init(void *_self);
 void    Entity_update(void *_self, double sf);
 void    Entity_clean(void *_self);
-void    Entity_notify(void *_self, Entity *entity, Event event);    // Notification from 
+void    Entity_load(void *_self);
+void    Entity_notify(void *_self, Entity *entity, char *event);    // Notification from 
                                                                     // EventSubsystem
 void    Entity_registerComponent(void *_self, Component *component);
                                                                     
@@ -42,23 +45,18 @@ void    *Entity_getComponent(void *_self, char *component_type);
 
 
 /* ---- TEST ENTITY -----*/
-CLASS_EXT(Door, Entity,
-	void (*open)();
-	void (*close)();
-	
+CLASS_EXT(Pigeon, Entity,
 	TransformComponent transform_cmp;
 	PhysicsComponent   physics_cmp;
 	RenderComponent    render_cmp;
 )
 
 
-void o();
-void c();
-
-void    Door_init(void *_self);
-void    Door_update(void *_self, double sf);
-void    Door_clean(void *_self);
-void    Door_notify(void *_self, Entity *entity, Event event);
+void    Pigeon_init(void *_self);
+void    Pigeon_update(void *_self, double sf);
+void    Pigeon_clean(void *_self);
+void    Pigeon_notify(void *_self, Entity *entity, char *event);
+void    Pigeon_load(void *_self);
 
 
 #endif /* __ENTITY_H__ */

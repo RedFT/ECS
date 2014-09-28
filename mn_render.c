@@ -15,11 +15,12 @@ void RenderManager_init(void *_self)
     
     self->registerApp       = RenderManager_registerApp;
     self->registerSubsystem = RenderManager_registerSubsystem;
-    //self->registerEntity    = RenderManager_registerEntity;
+    self->registerEntity    = RenderManager_registerEntity;
     
     INIT(RenderSubsystem, self->render_ssys);
     
     REGISTER(self->parent, Subsystem, self->render_ssys);
+    _INFO("Initialized %s", self->manager_type);
 }
 
 
@@ -83,12 +84,9 @@ void     RenderManager_registerEntity(void *_self, Entity *ent)
         return;
     RenderManager *self = _self;
     
-    //Manager_registerEntity(self, ent);
-    self->entity_list = g_slist_append(self->entity_list, ent);
-    _INFO("Added %s to %s's Entity list", ent->entity_type, self->manager_type);
+    Manager_registerEntity(self, ent);
     
-    
-    REGISTER(self->render_ssys, Entity, ent);
+    REGISTER(self->render_ssys, Entity, *ent);
 }
 
 

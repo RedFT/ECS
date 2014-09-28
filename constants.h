@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 
 // TODO: use doxygen format
+//       update: USE DOXYGEN!!
 
 
 #define IMG_DIR "./res/images/"

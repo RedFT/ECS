@@ -1,3 +1,8 @@
+/* NOTES --
+    Should probably remove the update
+    functions and function pointers
+ */
+
 #ifndef __CO_COMPONENT_H__
 #define __CO_COMPONENT_H__
 
@@ -30,7 +35,7 @@ typedef struct Entity Entity;
 
 CLASS(Component,
 	Entity *owner;             // reference to owner
-	char component_type[100];   // for ID'ing components
+	char component_type[100];   // for ID'ing component's type
 	void (*update)(void *_self);
 	void (*clean)(void *_self);
 	void (*registerEntity)(void *_self, Entity *ent);

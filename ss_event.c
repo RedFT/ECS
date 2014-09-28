@@ -38,19 +38,19 @@ void EventSubsystem_clean(void *_self)
 
 
 
-void EventSubsystem_notify(void *_self, Entity *entity, Event event)
+void EventSubsystem_notify(void *_self, Entity *src_ent, char *event)
 {
     if (!_self)
         return;
     EventSubsystem *self = _self;
     
     //_INFO("%s's Entity list has %d entities", self->subsystem_type, g_slist_length(self->entity_list));
-    Entity *ent = NULL;
+    Entity *dst_ent = NULL;
     GSList *iterator;
     for (iterator = self->entity_list; iterator; iterator = iterator->next)
     {
         
-        ent = iterator->data;
-        ent->notify(ent, entity, event);
+        dst_ent = iterator->data;
+        NOTIFY(*dst_ent, src_ent, event);
     }
 }

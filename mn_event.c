@@ -18,6 +18,7 @@ void EventManager_init(void *_self)
     
     REGISTER(self->parent, Subsystem, self->keyboard_ssys);
     REGISTER(self->parent, Subsystem, self->mouse_ssys);
+    _INFO("Initialized %s", self->manager_type);
 }
 
 
@@ -38,14 +39,31 @@ void EventManager_update(void *_self, double sf)
     {
         if (self->app)
             self->app->app_running = 0;
-        INFO("QUITTING SDL_QUIT");
+        INFO("QUITTING... WINDOW CLOSED");
     }
     
     if (self->keyboard[SDL_SCANCODE_ESCAPE])
     {
         if (self->app)
             self->app->app_running = 0;
-        INFO("QUITTING ESCAPE PRESSED");
+        INFO("QUITTING... ESCAPE PRESSED");
+    }
+    
+    if (self->keyboard[SDL_SCANCODE_UP])
+    {
+        NOTIFY(self->app->scene_manager.event_ssys, NULL, "UP");
+    }
+    if (self->keyboard[SDL_SCANCODE_DOWN])
+    {
+        NOTIFY(self->app->scene_manager.event_ssys, NULL, "DOWN");
+    }
+    if (self->keyboard[SDL_SCANCODE_LEFT])
+    {
+        NOTIFY(self->app->scene_manager.event_ssys, NULL, "LEFT");
+    }
+    if (self->keyboard[SDL_SCANCODE_RIGHT])
+    {
+        NOTIFY(self->app->scene_manager.event_ssys, NULL, "RIGHT");
     }
 }
 
@@ -55,9 +73,10 @@ void EventManager_clean(void *_self)
     if (!_self)
         return;
     EventManager *self = _self;
-    
+    /*
     CLEAN(self->keyboard_ssys);
     CLEAN(self->mouse_ssys);
+    */
     
     Manager_clean(&self->parent);
 }
