@@ -6,12 +6,12 @@
 
 // -- PhysicsComponent -- //
 CLASS_EXT(PhysicsComponent, Component,
-	double vx;      // velocity in x plane
-	double vy;      // velocity in y plane
-	double ax;      // acceleration in x plane
-	double ay;      // acceleration in y plane
-	double max_x;   // max velocity in x plane
-	double max_y;   // max velocity in y plane
+	double vx;      // velocity in x axis
+	double vy;      // velocity in y axis
+	double ax;      // acceleration in x axis
+	double ay;      // acceleration in y axis
+	double max_x;   // max velocity in x axis
+	double max_y;   // max velocity in y axis
 )
 
 void        PhysicsComponent_init(void *_self);
@@ -20,4 +20,3 @@ void        PhysicsComponent_clean(void *_self);
 
 
 #endif /* __CO_PHYSICS_H__ */
-
